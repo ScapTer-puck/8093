@@ -1,8 +1,41 @@
-<html>
-    <head>
-    <title>Мій перший сайт на Github</title>
-  <body style="background-color:lightgreen">
-        <h1 style="font-family:sans-serif">Мій перший сайт на Github</h1>
-    </head>
-  </body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анімований сайт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .animated-text {
+            font-size: 2em;
+            color: #333;
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: flyIn 2s forwards;
+        }
+
+        @keyframes flyIn {
+            0% { opacity: 0; transform: translateX(-100%); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="animated-text">Мій перший сайт</h1>
+    </div>
+</body>
 </html>
