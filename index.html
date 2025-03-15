@@ -3,39 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Анімований сайт</title>
+    <title>Об'єднаний сайт</title>
     <style>
+        /* Основні стилі */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #121212; /* Темний фон */
+            color: #ffffff; /* Світлий текст */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
-
-        .container {
+            position: relative;
             text-align: center;
         }
 
-        .animated-text {
-            font-size: 2em;
-            color: #333;
-            opacity: 0;
-            transform: translateX(-100%);
-            animation: flyIn 2s forwards;
+        /* Анімація "виліт з кутка" */
+        @keyframes flyInFromCorner {
+            0% { opacity: 0; transform: translate(-100%, -100%); }
+            100% { opacity: 1; transform: translate(0, 0); }
         }
 
-        @keyframes flyIn {
-            0% { opacity: 0; transform: translateX(-100%); }
-            100% { opacity: 1; transform: translateX(0); }
+        /* Анімація зникнення */
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Головний текст */
+        .animated-text {
+            font-size: 1.5em;
+            opacity: 0;
+            transform: translate(-100%, -100%);
+            animation: flyInFromCorner 0.3s forwards;
+        }
+
+        /* Текст праворуч */
+        .side-text {
+            font-size: 2em;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+        }
+
+        /* Стилі кнопки */
+        button {
+            margin-top: 20px;
+            padding: 0;
+            font-size: 1em;
+            cursor: pointer;
+            color: #ffffff; /* Текст кнопки */
+            background: none; /* Вимикаємо фон */
+            border: none; /* Забираємо рамку */
+        }
+
+        button:hover {
+            text-decoration: underline; /* Підкреслення при наведенні */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="animated-text">Мій перший сайт</h1>
+    <!-- Головний текст -->
+    <div id="text-container">
+        <h2 class="animated-text" id="main-text">Мій перший сайт</h2>
+		<p><h1 class="animated-text">Я дуже люблю програмування в Logika!</h1></p>
+        <button id="next-button" onclick="changeText()">Далі</button>
     </div>
+    <!-- Побічний текст праворуч -->
+    <h2 class="side-text" id="side-text">Це ще не все</h2>
+
+    <script>
+        function changeText() {
+            const mainText = document.getElementById("main-text");
+            const sideText = document.getElementById("side-text");
+
+            // Зникає головний текст
+            mainText.style.opacity = 0;
+            mainText.style.animation = "";
+
+            // Поява оновленого головного тексту
+            setTimeout(() => {
+                mainText.textContent = "Я дуже полюбляю ігри";
+                mainText.style.animation = "flyInFromCorner 0.3s forwards";
+            }, 300);
+
+            // Поява тексту праворуч
+            sideText.style.animation = "flyInFromCorner 0.3s forwards";
+
+            // Пропадання та оновлення тексту праворуч
+            setTimeout(() => {
+                sideText.style.animation = "fadeOut 0.3s forwards";
+                setTimeout(() => {
+                    sideText.textContent = "Ну чого ти чекаєш натискай далі!";
+                    sideText.style.animation = "flyInFromCorner 0.3s forwards";
+                }, 300);
+            }, 2000); // 2 секунди затримки перед оновленням тексту праворуч
+        }
+    </script>
 </body>
 </html>
